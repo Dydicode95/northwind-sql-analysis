@@ -53,10 +53,16 @@ The analysis aims to answer business questions such as:
 ```text
 northwind-sql-analysis/
 │
-├── sql/              # SQL queries and analysis scripts
-├── screenshots/      # Query results and visual references
-├── insights/         # Business findings and interpretations
-├── dashboard/        # Looker Studio dashboard (planned)
+├── sql/
+│   ├── 01_database_exploration.sql
+│   ├── 02_sales_analysis.sql
+│   ├── 03_customer_analysis.sql
+│   ├── 04_product_analysis.sql
+│   ├── 05_employee_analysis.sql
+│   └── 06_kpis.sql
+│
+├── screenshots/
+├── insights/
 └── README.md
 ```
 
