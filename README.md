@@ -92,3 +92,42 @@ northwind-sql-analysis/
 ├── insights/                         # [R] Documented reports, findings, and text summaries
 ├── screenshots/                      # [D] Visual captures of the interactive dashboard
 └── README.md
+
+---
+
+## 5. [R] Key Results & Business Insights
+
+Based on the exploratory SQL analysis, the following structural insights were uncovered:
+* **Financial Health:** Global net revenue reached **$1,265,793.04**, driven by a stabilized **Average Order Value (AOV) of $518.15**.
+* **Product Mix (Pareto & Distribution):** The portfolio structure shows extreme resilience. For instance, within a top-3 category mix, *Beverages* commands **40% of market shares**, while *Dairy Products* (**35%**) and *Confections* (**25%**) secure a highly balanced revenue spread.
+* **Logistical Efficiency:** Shipping delays vary substantially by carrier. *Federal Shipping* leads operational velocity with an average shipping delay of **146 days** (*note: standardized historical dataset scaling*), outperforming *United Package* (**175 days**) and *Speedy Express* (**178 days**).
+
+---
+
+## 6. [D] Decision-Making & Interactive Dashboard
+
+To turn these query results into an automated corporate monitoring tool, data was modeled into optimized SQL database views (including a custom transaction segmentation layer `v_bi_order_classification`) and connected to an interactive **Looker Studio** dashboard.
+
+📊 **Interactive Dashboard Link:** [Insert your Looker Studio public link here]
+
+The analytical application is designed across **3 high-impact operational pages**:
+
+### Page 1: Sales Performance (Executive Summary)
+* **Objective:** Visualizing global sales distribution and macro financial scales.
+* **Visuals:** Dynamic global chloropleth map paired with a ranked country turnover breakdown.
+
+### Page 2: Product Catalogue Analysis
+* **Objective:** Monitoring inventory revenue mix and drilling down into categories.
+* **Visuals:** Cohesive color-coded category donut chart coupled with a multi-selection filter to benchmark dynamic category market shares.
+
+### Page 3: Logistics & Shipping Performance
+* **Objective:** Carrier benchmarking and destination shipping lead times.
+* **Visuals:** Global shipping time mapping to identify geographical supply chain bottlenecks and carrier delay distributions.
+
+---
+
+## 🚀 How to Run this Project
+
+1. Clone the repository: `git clone https://github.com/yourusername/northwind-sql-analysis.git`
+2. Execute the scripts inside the `/sql` directory sequentially on your SQL Server instance.
+3. Access the `/screenshots` directory to review the localized BI report interface layout.
