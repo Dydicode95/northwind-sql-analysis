@@ -67,7 +67,7 @@ To structure the data exploration phase, the analysis aims to answer specific de
 ## 3. [N] Data Cleaning & Preparation
 
 Before running heavy aggregations, a critical data preprocessing and validation phase was established:
-* **Net Revenue Formula:** To avoid revenue overestimation, discounts must be programmatically factored in at the line-item level:  
+* **Net Revenue Formula:** To avoid revenue overestimation, discounts must be programmatically factored in at the line-item level:   
   $$\text{Net Revenue} = \text{UnitPrice} \times \text{Quantity} \times (1 - \text{Discount})$$
 * **Handling Missing Values:** Analyzing orders without a shipping date (`ShippedDate IS NULL`) to separate pending active shipments from potential logistical anomalies.
 * **Integrity Constraints:** Checking for data type coherence and temporal anomalies (e.g., ensuring `ShippedDate` or `RequiredDate` is never prior to `OrderDate`).
@@ -89,9 +89,13 @@ northwind-sql-analysis/
 │   ├── 05_employee_analysis.sql      # [A] Sales force performance assessment
 │   └── 06_kpi_views.sql              # [D] Database views generated for Looker Studio ingestion
 │
-├── insights/                         # [R] Documented reports, findings, and text summaries
 ├── screenshots/                      # [D] Visual captures of the interactive dashboard
+│   ├── page1_sales.png
+│   ├── page2_products.png
+│   └── page3_logistics.png
+├── northwind-er-diagram.jpg          # Database entity relationship diagram
 └── README.md
+```
 
 ---
 
@@ -108,7 +112,7 @@ Based on the exploratory SQL analysis, the following structural insights were un
 
 To turn these query results into an automated corporate monitoring tool, data was modeled into optimized SQL database views and connected to an interactive Looker Studio dashboard.
 
-📊 **Interactive Dashboard Link:** [Insert your Looker Studio public link here]
+📊 **Interactive Dashboard Link:** [👉 Click here to access the Live Looker Studio Report 👈](https://datastudio.google.com/reporting/22c6de5d-54a3-4c55-95eb-37153d292711/page/p_rtlg6dov4d)
 
 The analytical application is designed across **3 high-impact operational pages**:
 
@@ -116,19 +120,19 @@ The analytical application is designed across **3 high-impact operational pages*
 * **Objective:** Visualizing global sales distribution and macro financial scales.
 * **Visuals:** Dynamic global chloropleth map paired with a ranked country turnover breakdown.
 
-![Sales Performance Dashboard](screenshots/page1_sales.jpg)
+![Sales Performance Dashboard](screenshots/page1_sales.png)
 
 ### Page 2: Product Catalogue Analysis
 * **Objective:** Monitoring inventory revenue mix and drilling down into categories.
 * **Visuals:** Cohesive color-coded category donut chart coupled with a multi-selection filter to benchmark dynamic category market shares.
 
-![Product Catalogue Dashboard](screenshots/page2_products.jpg)
+![Product Catalogue Dashboard](screenshots/page2_products.png)
 
 ### Page 3: Logistics & Shipping Performance
 * **Objective:** Carrier benchmarking and destination shipping lead times.
 * **Visuals:** Global shipping time mapping to identify geographical supply chain bottlenecks and carrier delay distributions.
 
-![Logistics Performance Dashboard](screenshots/page3_logistics.jpg)
+![Logistics Performance Dashboard](screenshots/page3_logistics.png)
 
 ---
 
