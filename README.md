@@ -120,19 +120,19 @@ The analytical application is designed across **3 high-impact operational pages*
 * **Objective:** Visualizing global sales distribution and macro financial scales.
 * **Visuals:** Dynamic global chloropleth map paired with a ranked country turnover breakdown.
 
-![Sales Performance Dashboard](screenshots/page1_sales.png)
+![Sales Performance Dashboard](screenshots/page1_sales.jpg)
 
 ### Page 2: Product Catalogue Analysis
 * **Objective:** Monitoring inventory revenue mix and drilling down into categories.
 * **Visuals:** Cohesive color-coded category donut chart coupled with a multi-selection filter to benchmark dynamic category market shares.
 
-![Product Catalogue Dashboard](screenshots/page2_products.png)
+![Product Catalogue Dashboard](screenshots/page2_products.jpg)
 
 ### Page 3: Logistics & Shipping Performance
 * **Objective:** Carrier benchmarking and destination shipping lead times.
 * **Visuals:** Global shipping time mapping to identify geographical supply chain bottlenecks and carrier delay distributions.
 
-![Logistics Performance Dashboard](screenshots/page3_logistics.png)
+![Logistics Performance Dashboard](screenshots/page3_logistics.jpg)
 
 ---
 
