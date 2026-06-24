@@ -106,7 +106,7 @@ Based on the exploratory SQL analysis, the following structural insights were un
 
 ## 6. [D] Decision-Making & Interactive Dashboard
 
-To turn these query results into an automated corporate monitoring tool, data was modeled into optimized SQL database views (including a custom transaction segmentation layer `v_bi_order_classification`) and connected to an interactive **Looker Studio** dashboard.
+To turn these query results into an automated corporate monitoring tool, data was modeled into optimized SQL database views and connected to an interactive Looker Studio dashboard.
 
 📊 **Interactive Dashboard Link:** [Insert your Looker Studio public link here]
 
@@ -116,13 +116,19 @@ The analytical application is designed across **3 high-impact operational pages*
 * **Objective:** Visualizing global sales distribution and macro financial scales.
 * **Visuals:** Dynamic global chloropleth map paired with a ranked country turnover breakdown.
 
+![Sales Performance Dashboard](screenshots/page1_sales.jpg)
+
 ### Page 2: Product Catalogue Analysis
 * **Objective:** Monitoring inventory revenue mix and drilling down into categories.
 * **Visuals:** Cohesive color-coded category donut chart coupled with a multi-selection filter to benchmark dynamic category market shares.
 
+![Product Catalogue Dashboard](screenshots/page2_products.jpg)
+
 ### Page 3: Logistics & Shipping Performance
 * **Objective:** Carrier benchmarking and destination shipping lead times.
 * **Visuals:** Global shipping time mapping to identify geographical supply chain bottlenecks and carrier delay distributions.
+
+![Logistics Performance Dashboard](screenshots/page3_logistics.jpg)
 
 ---
 
