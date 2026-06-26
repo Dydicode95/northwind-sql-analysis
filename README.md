@@ -67,11 +67,13 @@ To structure the data exploration and the final BI architecture (6 Data Mart Vie
 
 ## 3. [N] Data Cleaning & Preparation
 
-Before running heavy aggregations, a critical data preprocessing and validation phase was established:
-* **Net Revenue Formula:** To avoid revenue overestimation, discounts must be programmatically factored in at the line-item level:   
-  $$\text{Net Revenue} = \text{UnitPrice} \times \text{Quantity} \times (1 - \text{Discount})$$
-* **Handling Missing Values:** Analyzing orders without a shipping date (`ShippedDate IS NULL`) to separate pending active shipments from potential logistical anomalies.
-* **Integrity Constraints:** Checking for data type coherence and temporal anomalies (e.g., ensuring `ShippedDate` or `RequiredDate` is never prior to `OrderDate`).
+Before running heavy aggregations, a critical data preprocessing and validation phase was established to ensure a "Single Source of Truth":
+
+* **Financial Precision & Net Revenue:** To avoid revenue overestimation and floating-point errors, discounts were programmatically factored in at the line-item level with strict decimal casting:   
+  **Net Revenue = Quantity × UnitPrice × (1 - Discount)**
+* **Handling Missing Values:** Analyzing orders without a shipping date (`ShippedDate IS NULL`) to transform missing data into an actionable logistical KPI ("Unshipped/Backlog" status).
+* **Temporal Integrity Constraints:** Checking for temporal anomalies (e.g., isolating rows where `ShippedDate` is prior to `OrderDate`) to prevent skewing the average lead time metrics.
+* **Supply Chain Health:** Implementing dynamic filters to exclude discontinued items and track the inventory stock position against the critical reorder level.
 
 ---
 
