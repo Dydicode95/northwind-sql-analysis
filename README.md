@@ -53,14 +53,15 @@ As a Data Analyst at Northwind Traders, the primary objective is to identify rev
 
 ## 2. [Q] Business Questions & Target KPIs
 
-To structure the data exploration phase, the analysis aims to answer specific decision-making business questions:
+To structure the data exploration and the final BI architecture (6 Data Mart Views), the analysis aims to answer specific decision-making business questions across 5 core dimensions:
 
 | Business Dimension | Core Business Question | Associated KPIs |
 | :--- | :--- | :--- |
-| **Sales Performance** | What is the macro trend of net revenue? Is there a distinct seasonality pattern? | Monthly/Annual Revenue, MoM Growth, Average Order Value (AOV) |
-| **Product & Category** | Which products generate 80% of total revenue (Pareto Principle)? Which products are obsolete? | Revenue per Product/Category, Sales Volume, Turnover Rate |
-| **Customer Activity** | Who are our "Champion" customers, and which accounts show a high risk of churning? | Customer Lifetime Revenue, Purchase Frequency, Recency |
-| **Operations & Logistics** | Which shippers perform best regarding lead times? Which countries face the highest delay rates? | Average Shipping Lead Time, Delay Rate per Destination Country |
+| **Sales & Regional Strategy** | What is the macroeconomic trajectory, and which regions or order profiles drive the most value? | MoM Growth, Regional Average Order Value (AOV), Order Size Classification (IQR) |
+| **Product & Catalog** | Which flagship products dominate the market, and do promotional discounts effectively drive volume? | Revenue Rank/Dense_Rank, Total Volume Sold, Discount Elasticity |
+| **Customer Activity (CRM)** | Who are our VIP "Champions", and which valuable accounts are currently at risk of churning? | RFM Segments (Recency, Frequency, Monetary), 90-Day Churn Alert, Lifetime Revenue |
+| **Operations & Logistics** | Are our shipping partners reliable, and what are the hidden supply chain costs per region? | Average Shipping Delay (Days), Late Shipment Rate (%), Average Freight Costs |
+| **Sales Force Performance** | Who are our top-performing reps ("Hunters" vs "Farmers"), and what is their geographic footprint? | Net Revenue Contribution, Rep's Average Order Value, Territory Mapping |
 
 ---
 
