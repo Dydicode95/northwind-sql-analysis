@@ -148,5 +148,5 @@ The analytical application is designed across **5 high-impact operational pages*
 ## 🚀 How to Run this Project
 
 1. Clone the repository: `git clone https://github.com/yourusername/northwind-sql-analysis.git`
-2. Execute the scripts inside the `sql/` directory sequentially on your SQL Server instance.
+2. Execute the `.sql` scripts sequentially on your SQL Server instance.
 3. Access the `screenshots/` directory to review the localized BI report interface layout.
