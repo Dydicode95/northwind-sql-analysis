@@ -85,8 +85,9 @@ SQL scripts are engineered modularly to align with each key step of the business
 * `sql/02_sales_analysis.sql` — [A] Macro revenue trends, seasonality, and AOV
 * `sql/03_customer_analysis.sql` — [A] Customer segmentation and revenue concentration
 * `sql/04_product_analysis.sql` — [A] Top/Flop products and category performance
-* `sql/05_employee_analysis.sql` — [A] Sales force performance assessment
-* `sql/06_kpi_views.sql` — [D] Database views generated for Looker Studio ingestion
+* `sql/05_logistics_analysis.sql` — [A] Shipping delays, carrier performance, and freight costs
+* `sql/06_employee_analysis.sql` — [A] Sales force performance assessment
+* `sql/07_kpi_views.sql` — [D] Database views generated for Looker Studio ingestion
 * `screenshots/` — [D] Visual captures of the interactive dashboard (pages 1 to 5)
 * `northwind-er-diagram.jpg` — Database entity relationship diagram
 * `README.md` — Project documentation
