@@ -110,7 +110,10 @@ Based on the exploratory SQL analysis and the Looker Studio data modeling, the f
 * **Self-Service Drill-Down:** The dashboard features dynamic filters (Category, ShipCountry, Date) allowing stakeholders to cross-filter these macro trends against specific regional markets or timeframes.
 
 ### 🚚 Logistics & Operations
-* *(To be completed with your Page 3 insights...)*
+* **Global Supply Chain Health:** The overall logistics network demonstrates strong reliability with a global average delivery time of **8.49 days** and a strictly controlled Late Shipment Rate of only **4.57%**, representing a total freight spend of **$63,955.02**.
+* **Carrier Benchmarking (The MVP):** **Federal Shipping** is the undisputed operational leader. It delivers the fastest shipping times (**7.47 days**) and the highest reliability (lowest late delivery rate), all while maintaining a competitive average freight cost.
+* **Carrier Inefficiency Alert:** The data exposes a critical issue with **United Package**. Despite being the most expensive carrier ($87.48 average freight), it is the worst-performing partner across all metrics—yielding the slowest delivery times (9.23 days) and the highest rate of late shipments (>5%).
+* **Cost-Effective Alternative:** **Speedy Express** proves to be the best budget-friendly option, offering the lowest average freight cost ($65.45) with middle-tier speed and reliability.
 
 ### 👥 Customer Behavior & Retention
 * *(To be completed with your Page 4 insights...)*
