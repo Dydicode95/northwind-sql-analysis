@@ -129,46 +129,41 @@ Based on the exploratory SQL analysis and the Looker Studio data modeling, the f
 
 ## 6. [D] Decision-Making & Interactive Dashboard
 
-To turn these query results into an automated corporate monitoring tool, data was modeled into optimized SQL database views and connected to an interactive Looker Studio dashboard.
+To turn static SQL queries into an automated corporate monitoring tool, the data was modeled into optimized database views (`07_kpi_views.sql`) and connected to an interactive Looker Studio dashboard. This BI application empowers stakeholders to move from data observation to active decision-making.
 
 📊 **Interactive Dashboard Link:** [👉 Click here to access the Live Looker Studio Report 👈](https://datastudio.google.com/reporting/22c6de5d-54a3-4c55-95eb-37153d292711/page/p_rtlg6dov4d)
 
-The analytical application is designed across **5 high-impact operational pages**:
+The application is structured across **5 high-impact operational pages**:
 
 ### Page 1: Sales Performance
-* **Objective:** Visualizing global sales distribution and macro financial scales.
-* **Visuals:** Dynamic global chloropleth map paired with a ranked country turnover breakdown and order size distribution.
-
-![Sales Performance Dashboard](screenshots/page1_sales.jpg)
+* **Objective:** Visualize global sales distribution and macro financial scales.
+* **Decision-Making:** Allows the Executive Board to allocate marketing budgets toward the most profitable regions (USA/Germany) and reliably forecast future revenue based on the highly stable Average Order Value ($1,369.44).
+<br>![Sales Performance Dashboard](screenshots/page1_sales.jpg)
 
 ### Page 2: Product Catalogue Analysis
-* **Objective:** Monitoring inventory revenue mix, seasonality, and drilling down into categories.
-* **Visuals:** Cohesive color-coded category donut charts coupled with a multi-selection filter to benchmark product market shares and seasonal trends.
-
-![Product Catalogue Dashboard](screenshots/page2_products.jpg)
+* **Objective:** Monitor inventory revenue mix, seasonality, and product performance.
+* **Decision-Making:** Empowers Product Managers to adjust inventory strategies. By distinguishing between "Revenue Drivers" (Côte de Blaye) and "Volume Drivers" (Dairy Products), supply chain orders can be optimized to prevent stock-outs during Q1 peaks.
+<br>![Product Catalogue Dashboard](screenshots/page2_products.jpg)
 
 ### Page 3: Logistics & Shipping Performance
-* **Objective:** Carrier benchmarking, freight costs analysis, and destination shipping lead times.
-* **Visuals:** Global shipping time mapping to identify geographical bottlenecks and bar charts comparing carrier delay distributions.
-
-![Logistics Performance Dashboard](screenshots/page3_logistics.jpg)
+* **Objective:** Audit carrier benchmarking, freight costs, and delivery times.
+* **Decision-Making:** Provides hard data for the Operations Director to renegotiate or terminate vendor contracts. The glaring underperformance of *United Package* justifies shifting freight volume toward the faster and more reliable *Federal Shipping*.
+<br>![Logistics Performance Dashboard](screenshots/page3_logistics.jpg)
 
 ### Page 4: Customer 360 Analysis
-* **Objective:** Segmenting the customer base to identify VIPs and monitor churn risk.
-* **Visuals:** RFM segmentation charts and a detailed customer portfolio matrix tracking spending and days of inactivity.
-
-![Customer 360 Dashboard](screenshots/page4_customers.jpg)
+* **Objective:** Segment the customer base (RFM) to identify VIPs and monitor churn risk.
+* **Decision-Making:** Triggers immediate CRM actions. The "Clients at Risk" matrix acts as an early warning system, prompting the sales team to initiate urgent win-back calls for historically high-value accounts (e.g., *Mère Paillarde*) before they permanently churn.
+<br>![Customer 360 Dashboard](screenshots/page4_customers.jpg)
 
 ### Page 5: Synthesis of Commercial Performance
-* **Objective:** Evaluating individual sales representative performance and overall team efficiency.
-* **Visuals:** Top performer contribution metrics (18.40%), revenue distribution by role (Treemap), and detailed employee rankings.
-
-![Employee Performance Dashboard](screenshots/page5_employees.jpg)
+* **Objective:** Evaluate individual sales representative performance and overall team efficiency.
+* **Decision-Making:** Guides the HR and Sales Directors in performance reviews and territory distribution. Identifying distinct profiles (like *Robert King's* high-ticket "Hunter" approach) allows management to tailor sales training and set realistic KPIs.
+<br>![Employee Performance Dashboard](screenshots/page5_employees.jpg)
 
 ---
 
 ## 🚀 How to Run this Project
 
 1. Clone the repository: `git clone https://github.com/yourusername/northwind-sql-analysis.git`
-2. Execute the `.sql` scripts sequentially on your SQL Server instance.
+2. Execute the `.sql` scripts sequentially (`01` to `07`) directly on your SQL Server instance to generate the analysis and the BI views.
 3. Access the `screenshots/` directory to review the localized BI report interface layout.
