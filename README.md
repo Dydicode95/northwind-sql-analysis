@@ -53,7 +53,7 @@ As a Data Analyst at Northwind Traders, the primary objective is to identify rev
 
 ## 2. [Q] Business Questions & Target KPIs
 
-To structure the data exploration and the final BI architecture (6 Data Mart Views), the analysis aims to answer specific decision-making business questions across 5 core dimensions:
+To structure the data exploration and the final BI architecture, the analysis aims to answer specific decision-making business questions across 5 core dimensions:
 
 | Business Dimension | Core Business Question | Associated KPIs |
 | :--- | :--- | :--- |
@@ -61,7 +61,7 @@ To structure the data exploration and the final BI architecture (6 Data Mart Vie
 | **Product & Catalog** | Which flagship products dominate the market, and do promotional discounts effectively drive volume? | Revenue Rank/Dense_Rank, Total Volume Sold, Discount Elasticity |
 | **Customer Activity (CRM)** | Who are our VIP "Champions", and which valuable accounts are currently at risk of churning? | RFM Segments (Recency, Frequency, Monetary), 90-Day Churn Alert, Lifetime Revenue |
 | **Operations & Logistics** | Are our shipping partners reliable, and what are the hidden supply chain costs per region? | Average Shipping Delay (Days), Late Shipment Rate (%), Average Freight Costs |
-| **Sales Force Performance** | Who are our top-performing reps ("Hunters" vs "Farmers"), and what is their geographic footprint? | Net Revenue Contribution, Rep's Average Order Value, Territory Mapping |
+| **Sales Force Performance** | Who are our top-performing reps, and what is their efficiency and contribution to the total revenue? | Net Revenue Contribution, Rep's Average Order Value, Top Performer Share (%) |
 
 ---
 
@@ -81,33 +81,26 @@ Before running heavy aggregations, a critical data preprocessing and validation 
 
 SQL scripts are engineered modularly to align with each key step of the business analysis workflow:
 
-```text
-northwind-sql-analysis/
-│
-├── sql/
-│   ├── 01_data_cleaning.sql          # [N] Cleansing, NULL handling, and data type formatting
-│   ├── 02_sales_analysis.sql         # [A] Macro revenue trends, seasonality, and AOV
-│   ├── 03_customer_analysis.sql      # [A] Customer segmentation and revenue concentration
-│   ├── 04_product_analysis.sql       # [A] Top/Flop products and category performance
-│   ├── 05_employee_analysis.sql      # [A] Sales force performance assessment
-│   └── 06_kpi_views.sql              # [D] Database views generated for Looker Studio ingestion
-│
-├── screenshots/                      # [D] Visual captures of the interactive dashboard
-│   ├── page1_sales.png
-│   ├── page2_products.png
-│   └── page3_logistics.png
-├── northwind-er-diagram.jpg          # Database entity relationship diagram
-└── README.md
-```
+* `sql/01_data_cleaning.sql` — [N] Cleansing, NULL handling, and data type formatting
+* `sql/02_sales_analysis.sql` — [A] Macro revenue trends, seasonality, and AOV
+* `sql/03_customer_analysis.sql` — [A] Customer segmentation and revenue concentration
+* `sql/04_product_analysis.sql` — [A] Top/Flop products and category performance
+* `sql/05_employee_analysis.sql` — [A] Sales force performance assessment
+* `sql/06_kpi_views.sql` — [D] Database views generated for Looker Studio ingestion
+* `screenshots/` — [D] Visual captures of the interactive dashboard (pages 1 to 5)
+* `northwind-er-diagram.jpg` — Database entity relationship diagram
+* `README.md` — Project documentation
 
 ---
 
 ## 5. [R] Key Results & Business Insights
 
 Based on the exploratory SQL analysis, the following structural insights were uncovered:
-* **Financial Health:** Global net revenue reached **$1,265,793.04**, driven by a stabilized **Average Order Value (AOV) of $518.15**.
-* **Product Mix (Pareto & Distribution):** The portfolio structure shows extreme resilience. For instance, within a top-3 category mix, *Beverages* commands **40% of market shares**, while *Dairy Products* (**35%**) and *Confections* (**25%**) secure a highly balanced revenue spread.
-* **Logistical Efficiency:** Shipping delays vary substantially by carrier. *Federal Shipping* leads operational velocity with an average shipping delay of **146 days** (*note: standardized historical dataset scaling*), outperforming *United Package* (**175 days**) and *Speedy Express* (**178 days**).
+* **Financial Health:** Global net revenue reached **$1,265,793.04**, driven by a stabilized **Average Order Value (AOV) of $1,369.44**.
+* **Product Mix (Pareto):** The portfolio structure shows extreme resilience. For instance, within a top-3 category mix, *Beverages* commands **21.2% of market shares**, while *Dairy Products* (**18.5%**) and *Confections* (**13.2%**) secure a highly balanced revenue spread.
+* **Logistical Efficiency:** Shipping delays vary substantially by carrier. *Federal Shipping* leads operational velocity, outperforming *United Package* and *Speedy Express* both in speed and late shipment rates.
+* **Customer Retention:** A strong core of 29 "VIP & Loyal" clients drives the majority of revenue, though 10 high-value accounts have been flagged as "At Risk" due to recent inactivity.
+* **Sales Force Concentration:** The sales team relies heavily on top talent. Using cross-join SQL logic, the data reveals that the top-performing representative alone drives **18.40%** of the total company revenue.
 
 ---
 
@@ -117,30 +110,42 @@ To turn these query results into an automated corporate monitoring tool, data wa
 
 📊 **Interactive Dashboard Link:** [👉 Click here to access the Live Looker Studio Report 👈](https://datastudio.google.com/reporting/22c6de5d-54a3-4c55-95eb-37153d292711/page/p_rtlg6dov4d)
 
-The analytical application is designed across **3 high-impact operational pages**:
+The analytical application is designed across **5 high-impact operational pages**:
 
-### Page 1: Sales Performance (Executive Summary)
+### Page 1: Sales Performance
 * **Objective:** Visualizing global sales distribution and macro financial scales.
-* **Visuals:** Dynamic global chloropleth map paired with a ranked country turnover breakdown.
+* **Visuals:** Dynamic global chloropleth map paired with a ranked country turnover breakdown and order size distribution.
 
 ![Sales Performance Dashboard](screenshots/page1_sales.jpg)
 
 ### Page 2: Product Catalogue Analysis
-* **Objective:** Monitoring inventory revenue mix and drilling down into categories.
-* **Visuals:** Cohesive color-coded category donut chart coupled with a multi-selection filter to benchmark dynamic category market shares.
+* **Objective:** Monitoring inventory revenue mix, seasonality, and drilling down into categories.
+* **Visuals:** Cohesive color-coded category donut charts coupled with a multi-selection filter to benchmark product market shares and seasonal trends.
 
 ![Product Catalogue Dashboard](screenshots/page2_products.jpg)
 
 ### Page 3: Logistics & Shipping Performance
-* **Objective:** Carrier benchmarking and destination shipping lead times.
-* **Visuals:** Global shipping time mapping to identify geographical supply chain bottlenecks and carrier delay distributions.
+* **Objective:** Carrier benchmarking, freight costs analysis, and destination shipping lead times.
+* **Visuals:** Global shipping time mapping to identify geographical bottlenecks and bar charts comparing carrier delay distributions.
 
 ![Logistics Performance Dashboard](screenshots/page3_logistics.jpg)
+
+### Page 4: Customer 360 Analysis
+* **Objective:** Segmenting the customer base to identify VIPs and monitor churn risk.
+* **Visuals:** RFM segmentation charts and a detailed customer portfolio matrix tracking spending and days of inactivity.
+
+![Customer 360 Dashboard](screenshots/page4_customers.jpg)
+
+### Page 5: Synthesis of Commercial Performance
+* **Objective:** Evaluating individual sales representative performance and overall team efficiency.
+* **Visuals:** Top performer contribution metrics (18.40%), revenue distribution by role (Treemap), and detailed employee rankings.
+
+![Employee Performance Dashboard](screenshots/page5_employees.jpg)
 
 ---
 
 ## 🚀 How to Run this Project
 
 1. Clone the repository: `git clone https://github.com/yourusername/northwind-sql-analysis.git`
-2. Execute the scripts inside the `/sql` directory sequentially on your SQL Server instance.
-3. Access the `/screenshots` directory to review the localized BI report interface layout.
+2. Execute the scripts inside the `sql/` directory sequentially on your SQL Server instance.
+3. Access the `screenshots/` directory to review the localized BI report interface layout.
