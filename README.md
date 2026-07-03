@@ -121,8 +121,11 @@ Based on the exploratory SQL analysis and the Looker Studio data modeling, the f
 * **Proactive Churn Alert System:** The dashboard serves as an operational warning system, flagging **10 high-value clients as "At Risk"**. Notably, a historical top-10 spender (*Mère Paillarde*, ~$29k total spent) was caught by the algorithm due to **188 days of inactivity**, providing the CRM team with a precise target for an immediate win-back campaign.
 * **Market Retention Dynamics:** The country segmentation matrix reveals that while the **USA and Germany** successfully nurture the highest number of VIP clients, the US market also experiences the highest churn rate (highest concentration of "Lost / Low Value" clients), signaling a highly competitive local landscape.
 
-### 💼 Employee Performance
-* *(To be completed with your Page 5 insights...)*
+### 💼 Employee Performance & Sales Force Efficiency
+* **Top Talent Dependency (The 18.40% KPI):** The sales department consists of a tight-knit team of **9 employees** generating an average efficiency ratio of **$140,643.68** per staff member. However, the performance is heavily skewed: using cross-join SQL logic, the data highlights that the top-performing representative alone drives **18.40%** of the total company revenue.
+* **The MVP Profile:** **Margaret Peacock** is the undisputed top performer. She leads across all volume and value metrics, generating **$232,890.86** in net revenue across **156 orders**. Her stacked bar chart also indicates a highly resilient and diversified portfolio, successfully closing deals across **20 different countries**.
+* **Hunter vs. Farmer Sales Profiles:** The detailed matrix allows management to identify distinct sales behaviors. While top reps rely on high order volumes (>120 orders), **Robert King** stands out with a "Hunter" profile: despite managing only 72 orders, he secures the highest Average Revenue Per Order (**$1,653.03**) in the entire company.
+* **Managerial Revenue Contribution:** The role distribution reveals that management is actively involved in closing deals. **Andrew Fuller (Vice President, Sales)** ranks as the 4th highest revenue generator ($166,537.76), proving that leadership maintains a strong, hands-on sales presence in the primary market.
 
 ## 6. [D] Decision-Making & Interactive Dashboard
 
