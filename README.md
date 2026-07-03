@@ -115,8 +115,11 @@ Based on the exploratory SQL analysis and the Looker Studio data modeling, the f
 * **Carrier Inefficiency Alert:** The data exposes a critical issue with **United Package**. Despite being the most expensive carrier ($87.48 average freight), it is the worst-performing partner across all metrics—yielding the slowest delivery times (9.23 days) and the highest rate of late shipments (>5%).
 * **Cost-Effective Alternative:** **Speedy Express** proves to be the best budget-friendly option, offering the lowest average freight cost ($65.45) with middle-tier speed and reliability.
 
-### 👥 Customer Behavior & Retention
-* *(To be completed with your Page 4 insights...)*
+### 👥 Customer Behavior & Retention (RFM Model)
+* **High-Value B2B Portfolio:** The active customer base consists of **89 clients** with a strong Average Revenue Per Client of **$14,222.39**, highlighting a high-stakes B2B environment.
+* **VIP Concentration:** The RFM segmentation successfully isolated a core of **29 "Champions / VIP"** clients. The portfolio is extremely top-heavy: the top 3 clients (*QUICK-Stop, Ernst Handel, Save-a-lot Markets*) have each generated over $100k, acting as the absolute pillars of the company's revenue.
+* **Proactive Churn Alert System:** The dashboard serves as an operational warning system, flagging **10 high-value clients as "At Risk"**. Notably, a historical top-10 spender (*Mère Paillarde*, ~$29k total spent) was caught by the algorithm due to **188 days of inactivity**, providing the CRM team with a precise target for an immediate win-back campaign.
+* **Market Retention Dynamics:** The country segmentation matrix reveals that while the **USA and Germany** successfully nurture the highest number of VIP clients, the US market also experiences the highest churn rate (highest concentration of "Lost / Low Value" clients), signaling a highly competitive local landscape.
 
 ### 💼 Employee Performance
 * *(To be completed with your Page 5 insights...)*
