@@ -93,17 +93,27 @@ SQL scripts are engineered modularly to align with each key step of the business
 * `README.md` — Project documentation
 
 ---
-
 ## 5. [R] Key Results & Business Insights
 
-Based on the exploratory SQL analysis, the following structural insights were uncovered:
-* **Financial Health:** Global net revenue reached **$1,265,793.04**, driven by a stabilized **Average Order Value (AOV) of $1,369.44**.
-* **Product Mix (Pareto):** The portfolio structure shows extreme resilience. For instance, within a top-3 category mix, *Beverages* commands **21.2% of market shares**, while *Dairy Products* (**18.5%**) and *Confections* (**13.2%**) secure a highly balanced revenue spread.
-* **Logistical Efficiency:** Shipping delays vary substantially by carrier. *Federal Shipping* leads operational velocity, outperforming *United Package* and *Speedy Express* both in speed and late shipment rates.
-* **Customer Retention:** A strong core of 29 "VIP & Loyal" clients drives the majority of revenue, though 10 high-value accounts have been flagged as "At Risk" due to recent inactivity.
-* **Sales Force Concentration:** The sales team relies heavily on top talent. Using cross-join SQL logic, the data reveals that the top-performing representative alone drives **18.40%** of the total company revenue.
+Based on the exploratory SQL analysis and the Looker Studio data modeling, the following strategic insights were uncovered:
 
----
+### 🌍 Macro Sales & Market Concentration
+* **Global Footprint:** Northwind operates across **21 countries**, generating **$1,265,793.05** in net revenue across 830 distinct orders.
+* **Geographic Dependency:** The revenue distribution is highly concentrated. The **USA** (approx. $245k) and **Germany** (approx. $235k) are the undisputed market leaders, heavily outperforming the next-tier markets like Austria and Brazil.
+* **Financial Predictability:** Order behavior is remarkably standardized, with **92.9%** of transactions classified as "Medium Orders". This low variance solidifies the Average Order Value (AOV) of **$1,369.44** as a highly reliable baseline for revenue forecasting.
+* **Margin Impact:** Total promotional discounts amounted to **$88,665.57**, representing a significant lever that needs continuous monitoring to protect gross margins.
+
+### 📦 Product & Category Mix
+* *(To be completed with your Page 2 insights...)*
+
+### 🚚 Logistics & Operations
+* *(To be completed with your Page 3 insights...)*
+
+### 👥 Customer Behavior & Retention
+* *(To be completed with your Page 4 insights...)*
+
+### 💼 Employee Performance
+* *(To be completed with your Page 5 insights...)*
 
 ## 6. [D] Decision-Making & Interactive Dashboard
 
