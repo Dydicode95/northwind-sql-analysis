@@ -104,7 +104,10 @@ Based on the exploratory SQL analysis and the Looker Studio data modeling, the f
 * **Margin Impact:** Total promotional discounts amounted to **$88,665.57**, representing a significant lever that needs continuous monitoring to protect gross margins.
 
 ### 📦 Product & Category Mix
-* *(To be completed with your Page 2 insights...)*
+* **Portfolio Pillars:** The catalog is highly dependent on two core categories: **Beverages (21.2%)** and **Dairy Products (18.5%)**, which together drive nearly 40% of the total company revenue.
+* **Premium vs. Volume Strategy:** The data reveals a strong dichotomy between revenue drivers and volume drivers. The beverage **"Côte de Blaye"** is a massive revenue outlier (Premium high-ticket item), generating nearly double the revenue of the second-best item. However, the physical volume (units moved) is overwhelmingly dominated by Dairy products (Camembert, Raclette, Gorgonzola).
+* **Growth & Seasonality:** The time-series analysis indicates a significant sales acceleration in **Q1 1998**, heavily propelled by spikes in Beverage and Dairy orders.
+* **Self-Service Drill-Down:** The dashboard features dynamic filters (Category, ShipCountry, Date) allowing stakeholders to cross-filter these macro trends against specific regional markets or timeframes.
 
 ### 🚚 Logistics & Operations
 * *(To be completed with your Page 3 insights...)*
