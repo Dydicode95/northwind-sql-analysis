@@ -131,7 +131,7 @@ Based on the exploratory SQL analysis and the Looker Studio data modeling, the f
 
 To turn static SQL queries into an automated corporate monitoring tool, the data was modeled into optimized database views (`07_kpi_views.sql`) and connected to an interactive Looker Studio dashboard. This BI application empowers stakeholders to move from data observation to active decision-making.
 
-📊 **Interactive Dashboard Link:** [👉 Click here to access the Live Looker Studio Report 👈](https://datastudio.google.com/reporting/22c6de5d-54a3-4c55-95eb-37153d292711/page/p_rtlg6dov4d)
+📊 **Interactive Dashboard Link:** [👉 Click here to access the Live Looker Studio Report 👈](https://datastudio.google.com/s/tn5ILiwSGLQ)
 
 The application is structured across **5 high-impact operational pages**:
 
@@ -159,7 +159,6 @@ The application is structured across **5 high-impact operational pages**:
 * **Objective:** Evaluate individual sales representative performance and overall team efficiency.
 * **Decision-Making:** Guides the HR and Sales Directors in performance reviews and territory distribution. Identifying distinct profiles (like *Robert King's* high-ticket "Hunter" approach) allows management to tailor sales training and set realistic KPIs.
 <br>![Employee Performance Dashboard](screenshots/page5_employees.jpg)
-
 ---
 
 ## 🚀 How to Run this Project
