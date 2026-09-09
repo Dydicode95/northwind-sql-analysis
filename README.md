@@ -1,168 +1,164 @@
-# Northwind SQL Business Analysis
+# Northwind Business Analysis — SQL Server & Looker Studio
 
-## Project Overview
+A portfolio case study turning Northwind's sample transactional data into business analysis and interactive reporting across sales, products, customers, shipping, and employee activity.
 
-This project explores the Northwind database using SQL Server to analyze sales performance, customer activity, product performance, and operational business KPIs.
+**Tools:** SQL Server · T-SQL · Looker Studio  
+**Deliverables:** data-quality audit, business analysis scripts, six reporting views, and five dashboard pages.
 
-The goal is to simulate a real-world business analysis workflow by transforming raw transactional data into actionable insights using SQL.
+**[Explore the interactive Looker Studio report](https://datastudio.google.com/s/gjPixVIulsE)**
 
-Through this project, business-oriented questions are explored to better understand commercial performance, customer behavior, product trends, and sales distribution.
+## Project objective
 
----
+Acting as a data analyst for the fictitious Northwind Traders company, this project investigates revenue drivers, customer purchasing patterns, product demand, shipment timing, and the distribution of sales activity across employees. It connects business questions to explicit KPI definitions, SQL transformations, and visual analysis.
 
-## 🎯 Methodological Framework: CQNARD
+The workflow runs from SQL analysis to dashboard reporting: **execute the SQL scripts → export the result sets → import the data into Looker Studio**. This is an analysis of a historical sample dataset, with proposed actions rather than measured business impact.
 
-To ensure a rigorous, business-driven approach and compelling data storytelling, this project is structured around the **CQNARD** framework:
-* **C**ontext (Business Context & Environment)
-* **Q**uestion (Core Business Questions & KPIs)
-* **N**etcleaning (Data Cleansing & Preparation)
-* **A**nalysis (Exploratory Data Querying)
-* **R**esults (Key Insights & Findings)
-* **D**ecision (Actionable Recommendations & Dashboarding)
+## Results at a glance
 
----
+| Indicator | Revised dashboard |
+| --- | ---: |
+| Net revenue | Approximately $1.27 million |
+| Orders | 830 |
+| Countries served | 21 |
+| Average order value | $1,525.05 |
+| Discount rate | 6.55% |
+| Customers with purchase history | 89 |
+| Employees represented | 9 |
 
-## Database Description
+The sales trend covers July 1996 through April 1998 and explicitly excludes the incomplete May 1998 month. This exclusion applies to the trend chart; it should not be assumed to apply to every headline KPI.
 
-The Northwind database is a sample database that was originally created by Microsoft and used as the basis for their tutorials in a variety of database products for decades. The Northwind database contains the sales data for a fictitious company called “Northwind Traders,” which imports and exports specialty foods from around the world. 
+### Five business findings
 
-The Northwind database is an excellent tutorial schema for a small-business ERP, with customers, orders, inventory, purchasing, suppliers, shipping, employees, and single-entry accounting. The Northwind database has since been ported to a variety of non-Microsoft databases, including PostgreSQL.
+1. **Revenue is concentrated geographically.** The USA and Germany lead the country revenue ranking. High-value outliers account for **7.1% of orders** under the IQR classification. These views support a review of market concentration and large-order exposure; the remaining 92.9% in the typical range does not establish low variance or forecast accuracy.
 
-The Northwind dataset includes sample data for the following:
-* **Suppliers:** Suppliers and vendors of Northwind.
-* **Customers:** Customers who buy products from Northwind.
-* **Employees:** Employee details of Northwind traders.
-* **Products:** Product information.
-* **Shippers:** The details of the shippers who ship the products from the traders to the end-customers.
-* **Orders and Order_Details:** Sales Order transactions taking place between the customers & the company.
+2. **Product priorities differ by revenue and volume.** Côte de Blaye leads product net revenue at approximately **$141.4k**, while Camembert Pierrot leads units sold at approximately **1.6k units**. Beverages and Dairy Products generate approximately **$267.9k** and **$234.5k**, respectively—roughly **40% of revenue**, calculated from the rounded displayed amounts. This supports separate reviews of high-revenue products and high-volume replenishment needs, subject to stock and lead-time evidence.
 
-The Northwind sample database includes 14 tables and the table relationships are showcased in the following entity relationship diagram.
+3. **High-value customer inactivity provides a focused review list.** The revised segmentation shows **30 Champions / VIP customers (33.7%)** and **10 At Risk / High Value customers (11.2%)**. Mère Paillarde illustrates the latter group, with **$28,872.19** in historical net purchases and **188 days since its last order** at the dataset reference date. These accounts are candidates for contact-history review; inactivity is not confirmed churn.
 
-### Entity Relationship Diagram (ERD)
+4. **Shipment timing warrants operational investigation.** The dashboard reports **8.49 days** from order to shipment on average and a **4.57%** late-shipment rate. Orders assigned to Federal Shipping show **7.47 days** and **3.61%**, compared with **9.23 days** and **5.08%** for United Package. These differences support investigation of order mix and fulfillment processes, without establishing carrier responsibility or customer delivery performance.
 
-To visualize how these tables interact and identify the primary/foreign key mappings, please refer to the relational schema below:
+5. **The revenue leader and the AOV leader are different employees.** Margaret Peacock manages **156 orders**, generating approximately **$232.9k** and **18.40%** of company net revenue. Anne Dodsworth has the highest displayed revenue per order at **$1,797.86**, across **43 orders**. These are complementary measures of sales activity; territory, account allocation, tenure, and targets are needed to assess individual performance fairly.
 
-![Northwind Database Schema](northwind-er-diagram.jpg)
+*Metrics and screenshots: the five-page export `Northwind_—_Business_Performance_Dashboard.pdf`, based on imported SQL results. Monetary notation is normalized to English in this README.*
 
----
+## Dashboard preview
 
-## 1. [C] Business Context
-As a Data Analyst at Northwind Traders, the primary objective is to identify revenue growth drivers, map logistical efficiencies, and decode customer purchasing behavior to guide the executive team's strategic commercial decisions.
+The report contains five complementary business views. Expand each section to see the corresponding capture.
 
----
+### Sales Performance
 
-## 2. [Q] Business Questions & Target KPIs
+Revenue trend, country ranking, headline KPIs, and order-value classification.
 
-To structure the data exploration and the final BI architecture, the analysis aims to answer specific decision-making business questions across 5 core dimensions:
+![Sales Performance](screenshots/page1_sales.png)
 
-| Business Dimension | Core Business Question | Associated KPIs |
-| :--- | :--- | :--- |
-| **Sales & Regional Strategy** | What is the macroeconomic trajectory, and which regions or order profiles drive the most value? | MoM Growth, Regional Average Order Value (AOV), Order Size Classification (IQR) |
-| **Product & Catalog** | Which flagship products dominate the market, and do promotional discounts effectively drive volume? | Revenue Rank/Dense_Rank, Total Volume Sold, Discount Elasticity |
-| **Customer Activity (CRM)** | Who are our VIP "Champions", and which valuable accounts are currently at risk of churning? | RFM Segments (Recency, Frequency, Monetary), 90-Day Churn Alert, Lifetime Revenue |
-| **Operations & Logistics** | Are our shipping partners reliable, and what are the hidden supply chain costs per region? | Average Shipping Delay (Days), Late Shipment Rate (%), Average Freight Costs |
-| **Sales Force Performance** | Who are our top-performing reps, and what is their efficiency and contribution to the total revenue? | Net Revenue Contribution, Rep's Average Order Value, Top Performer Share (%) |
+<details>
+<summary>Product Performance</summary>
 
----
+Product revenue and volume rankings, category revenue, and monthly category volumes. May 1998 is excluded from the monthly volume trend.
 
-## 3. [N] Data Cleaning & Preparation
+![Product Catalogue Analysis](screenshots/page2_products.png)
 
-Before running heavy aggregations, a critical data preprocessing and validation phase was established to ensure a "Single Source of Truth":
+</details>
 
-* **Financial Precision & Net Revenue:** To avoid revenue overestimation and floating-point errors, discounts were programmatically factored in at the line-item level with strict decimal casting:   
-  **Net Revenue = Quantity × UnitPrice × (1 - Discount)**
-* **Handling Missing Values:** Analyzing orders without a shipping date (`ShippedDate IS NULL`) to transform missing data into an actionable logistical KPI ("Unshipped/Backlog" status).
-* **Temporal Integrity Constraints:** Checking for temporal anomalies (e.g., isolating rows where `ShippedDate` is prior to `OrderDate`) to prevent skewing the average lead time metrics.
-* **Supply Chain Health:** Implementing dynamic filters to exclude discontinued items and track the inventory stock position against the critical reorder level.
+<details>
+<summary>Logistics & Shipping</summary>
 
----
+Order-to-shipment lead times, shipment timing, and recorded freight amounts by carrier and destination.
 
-## 4. [A] Exploratory Analysis & Repository Structure
+![Logistics and Shipping Performance](screenshots/page3_logistics.png)
 
-SQL scripts are engineered modularly to align with each key step of the business analysis workflow:
+</details>
 
-* `01_data_cleaning.sql` — [N] Cleansing, NULL handling, and data type formatting
-* `02_sales_analysis.sql` — [A] Macro revenue trends, seasonality, and AOV
-* `03_customer_analysis.sql` — [A] Customer segmentation and revenue concentration
-* `04_product_analysis.sql` — [A] Top/Flop products and category performance
-* `05_logistics_analysis.sql` — [A] Shipping delays, carrier performance, and freight costs
-* `06_employee_analysis.sql` — [A] Sales force performance assessment
-* `07_kpi_views.sql` — [D] Database views generated for Looker Studio ingestion
-* `screenshots/` — [D] Visual captures of the interactive dashboard (pages 1 to 5)
-* `northwind-er-diagram.jpg` — Database entity relationship diagram
-* `README.md` — Project documentation
+<details>
+<summary>Customer Analysis</summary>
 
----
-## 5. [R] Key Results & Business Insights
+Customer purchase history, RFM segmentation, and segment distribution by customer country.
 
-Based on the exploratory SQL analysis and the Looker Studio data modeling, the following strategic insights were uncovered:
+![Customer 360 Analysis](screenshots/page4_customers.png)
 
-### 🌍 Macro Sales & Market Concentration
-* **Global Footprint:** Northwind operates across **21 countries**, generating **$1,265,793.05** in net revenue across 830 distinct orders.
-* **Geographic Dependency:** The revenue distribution is highly concentrated. The **USA** (approx. $245k) and **Germany** (approx. $235k) are the undisputed market leaders, heavily outperforming the next-tier markets like Austria and Brazil.
-* **Financial Predictability:** Order behavior is remarkably standardized, with **92.9%** of transactions classified as "Medium Orders". This low variance solidifies the Average Order Value (AOV) of **$1,369.44** as a highly reliable baseline for revenue forecasting.
-* **Margin Impact:** Total promotional discounts amounted to **$88,665.57**, representing a significant lever that needs continuous monitoring to protect gross margins.
+</details>
 
-### 📦 Product & Category Mix
-* **Portfolio Pillars:** The catalog is highly dependent on two core categories: **Beverages (21.2%)** and **Dairy Products (18.5%)**, which together drive nearly 40% of the total company revenue.
-* **Premium vs. Volume Strategy:** The data reveals a strong dichotomy between revenue drivers and volume drivers. The beverage **"Côte de Blaye"** is a massive revenue outlier (Premium high-ticket item), generating nearly double the revenue of the second-best item. However, the physical volume (units moved) is overwhelmingly dominated by Dairy products (Camembert, Raclette, Gorgonzola).
-* **Growth & Seasonality:** The time-series analysis indicates a significant sales acceleration in **Q1 1998**, heavily propelled by spikes in Beverage and Dairy orders.
-* **Self-Service Drill-Down:** The dashboard features dynamic filters (Category, ShipCountry, Date) allowing stakeholders to cross-filter these macro trends against specific regional markets or timeframes.
+<details>
+<summary>Employee Performance</summary>
 
-### 🚚 Logistics & Operations
-* **Global Supply Chain Health:** The overall logistics network demonstrates strong reliability with a global average delivery time of **8.49 days** and a strictly controlled Late Shipment Rate of only **4.57%**, representing a total freight spend of **$63,955.02**.
-* **Carrier Benchmarking (The MVP):** **Federal Shipping** is the undisputed operational leader. It delivers the fastest shipping times (**7.47 days**) and the highest reliability (lowest late delivery rate), all while maintaining a competitive average freight cost.
-* **Carrier Inefficiency Alert:** The data exposes a critical issue with **United Package**. Despite being the most expensive carrier ($87.48 average freight), it is the worst-performing partner across all metrics—yielding the slowest delivery times (9.23 days) and the highest rate of late shipments (>5%).
-* **Cost-Effective Alternative:** **Speedy Express** proves to be the best budget-friendly option, offering the lowest average freight cost ($65.45) with middle-tier speed and reliability.
+Employee revenue, order counts, revenue contribution, average order value, and revenue by role.
 
-### 👥 Customer Behavior & Retention (RFM Model)
-* **High-Value B2B Portfolio:** The active customer base consists of **89 clients** with a strong Average Revenue Per Client of **$14,222.39**, highlighting a high-stakes B2B environment.
-* **VIP Concentration:** The RFM segmentation successfully isolated a core of **29 "Champions / VIP"** clients. The portfolio is extremely top-heavy: the top 3 clients (*QUICK-Stop, Ernst Handel, Save-a-lot Markets*) have each generated over $100k, acting as the absolute pillars of the company's revenue.
-* **Proactive Churn Alert System:** The dashboard serves as an operational warning system, flagging **10 high-value clients as "At Risk"**. Notably, a historical top-10 spender (*Mère Paillarde*, ~$29k total spent) was caught by the algorithm due to **188 days of inactivity**, providing the CRM team with a precise target for an immediate win-back campaign.
-* **Market Retention Dynamics:** The country segmentation matrix reveals that while the **USA and Germany** successfully nurture the highest number of VIP clients, the US market also experiences the highest churn rate (highest concentration of "Lost / Low Value" clients), signaling a highly competitive local landscape.
+![Employee Performance Analysis](screenshots/page5_employees.png)
 
-### 💼 Employee Performance & Sales Force Efficiency
-* **Top Talent Dependency (The 18.40% KPI):** The sales department consists of a tight-knit team of **9 employees** generating an average efficiency ratio of **$140,643.68** per staff member. However, the performance is heavily skewed: using cross-join SQL logic, the data highlights that the top-performing representative alone drives **18.40%** of the total company revenue.
-* **The MVP Profile:** **Margaret Peacock** is the undisputed top performer. She leads across all volume and value metrics, generating **$232,890.86** in net revenue across **156 orders**. Her stacked bar chart also indicates a highly resilient and diversified portfolio, successfully closing deals across **20 different countries**.
-* **Hunter vs. Farmer Sales Profiles:** The detailed matrix allows management to identify distinct sales behaviors. While top reps rely on high order volumes (>120 orders), **Robert King** stands out with a "Hunter" profile: despite managing only 72 orders, he secures the highest Average Revenue Per Order (**$1,653.03**) in the entire company.
-* **Managerial Revenue Contribution:** The role distribution reveals that management is actively involved in closing deals. **Andrew Fuller (Vice President, Sales)** ranks as the 4th highest revenue generator ($166,537.76), proving that leadership maintains a strong, hands-on sales presence in the primary market.
+</details>
 
-## 6. [D] Decision-Making & Interactive Dashboard
+## SQL analysis and repository structure
 
-To turn static SQL queries into an automated corporate monitoring tool, the data was modeled into optimized database views (`07_kpi_views.sql`) and connected to an interactive Looker Studio dashboard. This BI application empowers stakeholders to move from data observation to active decision-making.
+The analysis follows the CQNARD sequence: Context, Questions, data quality and preparation, Analysis, Results, and Decisions.
 
-📊 **Interactive Dashboard Link:** [👉 Click here to access the Live Looker Studio Report 👈](https://datastudio.google.com/s/tn5ILiwSGLQ)
+| File | Analytical purpose |
+| --- | --- |
+| `01_data_cleaning.sql` | Non-destructive quality audit: financial fields, missing references, dates, pending orders, and inventory snapshot |
+| `02_sales_analysis.sql` | Monthly revenue, growth, cumulative revenue, and first-observed customer orders |
+| `03_customer_analysis.sql` | Customer value, RFM segmentation, inactivity monitoring, and regional basket comparisons |
+| `04_product_analysis.sql` | Product/category rankings, revenue versus volume profiles, discount exposure, and inventory snapshot |
+| `05_logistics_analysis.sql` | Shipment timing, lead times, freight amounts, and carrier/destination comparisons |
+| `06_employee_analysis.sql` | Employee metrics, revenue contribution, and customer-geography footprint |
+| `07_kpi_views.sql` | Six reporting views using `CREATE OR ALTER VIEW` |
+| `07_kpi_views_final_sql_server.sql` | Equivalent view definitions using conditional creation followed by `ALTER VIEW`, plus reconciliation queries |
+| `screenshots/` | Five captures from the revised dashboard pages |
+| `README.md` | Project objectives, results, metric definitions, and reproduction notes |
 
-The application is structured across **5 high-impact operational pages**:
+The two `07` scripts define the same six views with different deployment syntax. Execute one suitable for the SQL environment. SQL analysis also includes outputs beyond those displayed in the dashboard.
 
-### Page 1: Sales Performance
-* **Objective:** Visualize global sales distribution and macro financial scales.
-* **Decision-Making:** Allows the Executive Board to allocate marketing budgets toward the most profitable regions (USA/Germany) and reliably forecast future revenue based on the highly stable Average Order Value ($1,369.44).
-<br>![Sales Performance Dashboard](screenshots/page1_sales.jpg)
+## Metric definitions and reporting model
 
-### Page 2: Product Catalogue Analysis
-* **Objective:** Monitor inventory revenue mix, seasonality, and product performance.
-* **Decision-Making:** Empowers Product Managers to adjust inventory strategies. By distinguishing between "Revenue Drivers" (Côte de Blaye) and "Volume Drivers" (Dairy Products), supply chain orders can be optimized to prevent stock-outs during Q1 peaks.
-<br>![Product Catalogue Dashboard](screenshots/page2_products.jpg)
+### Revenue and order value
 
-### Page 3: Logistics & Shipping Performance
-* **Objective:** Audit carrier benchmarking, freight costs, and delivery times.
-* **Decision-Making:** Provides hard data for the Operations Director to renegotiate or terminate vendor contracts. The glaring underperformance of *United Package* justifies shifting freight volume toward the faster and more reliable *Federal Shipping*.
-<br>![Logistics Performance Dashboard](screenshots/page3_logistics.jpg)
+Calculations use transaction-time fields from `[Order Details]`, rather than current prices from `Products`:
 
-### Page 4: Customer 360 Analysis
-* **Objective:** Segment the customer base (RFM) to identify VIPs and monitor churn risk.
-* **Decision-Making:** Triggers immediate CRM actions. The "Clients at Risk" matrix acts as an early warning system, prompting the sales team to initiate urgent win-back calls for historically high-value accounts (e.g., *Mère Paillarde*) before they permanently churn.
-<br>![Customer 360 Dashboard](screenshots/page4_customers.jpg)
+```text
+Gross revenue   = SUM(Quantity × UnitPrice)
+Discount amount = SUM(Quantity × UnitPrice × Discount)
+Net revenue     = SUM(Quantity × UnitPrice × (1 − Discount))
+Discount rate   = Discount amount / Gross revenue
+AOV             = Net revenue / Distinct orders
+```
 
-### Page 5: Synthesis of Commercial Performance
-* **Objective:** Evaluate individual sales representative performance and overall team efficiency.
-* **Decision-Making:** Guides the HR and Sales Directors in performance reviews and territory distribution. Identifying distinct profiles (like *Robert King's* high-ticket "Hunter" approach) allows management to tailor sales training and set realistic KPIs.
-<br>![Employee Performance Dashboard](screenshots/page5_employees.jpg)
----
+Financial inputs are cast to `DECIMAL`, with rounding generally applied at presentation time. Freight is separate from product net revenue. These measures do not establish profit or margin.
 
-## 🚀 How to Run this Project
+Order lines are aggregated to orders before calculating customer and employee metrics. Overall AOV uses total revenue divided by total orders, rather than an average of country or employee AOVs. Counts of orders containing a product or category are not additive across products or categories.
 
-1. Clone the repository: `git clone https://github.com/yourusername/northwind-sql-analysis.git`
-2. Execute the `.sql` scripts sequentially (`01` to `07`) directly on your SQL Server instance to generate the analysis and the BI views.
-3. Access the `screenshots/` directory to review the localized BI report interface layout.
+### Customer segmentation and shipment timing
+
+**RFM:** recency is measured against the latest order date in the dataset, frequency counts distinct orders with detail records, and monetary value sums net purchases. `PERCENT_RANK()` produces relative scores from 1 to 4 while preserving ties. Champions have R, F, and M scores of at least 3; At Risk / High Value customers have R ≤ 2 and F and M ≥ 3. The separate 90-day inactivity query is a different monitoring rule. The 89 customers represented have purchase history; the figure is not a count of every customer record.
+
+**Shipping:** lead time is the day difference between `OrderDate` and `ShippedDate`. The view retains valid shipped orders with shipper records. A late shipment satisfies `ShippedDate > RequiredDate`; missing required dates are excluded from the rate denominator. Pending orders are audited separately. `ShippedDate` is not a delivery date. The dashboard's freight figures represent recorded order amounts, whose accounting treatment is not established by the dataset.
+
+### Six reporting views
+
+| View | Row grain |
+| --- | --- |
+| `v_bi_regional_turnover_update` | Shipping country |
+| `v_bi_order_value_outliers` | Order with order-detail records |
+| `v_bi_product_performance_by_region` | Product × shipping country × order month |
+| `v_bi_shipping_performance` | Valid shipped order with a shipper record |
+| `v_bi_customer_360` | Customer with purchase history |
+| `v_bi_employee_performance` | Employee with order-detail-backed sales activity |
+
+Sales and shipping use `ShipCountry`; customer analysis uses `Customers.Country`. IQR thresholds and employee contribution denominators are computed over their full SQL source populations. Product ranks apply within each country-month, not globally. Dashboard filters do not automatically recompute these definitions.
+
+## Reproduce the analysis
+
+1. Load Northwind into a dedicated SQL Server database. The scripts require `Orders`, `[Order Details]`, `Customers`, `Products`, `Categories`, `Shippers`, and `Employees` in the `dbo` schema. The installation dataset is not included in the SQL archive.
+2. Replace each leading `USE master;` with the database containing those tables, for example `USE [Northwind];`. Use a SQL client configured for T-SQL and `GO` batches, with read access and permission to create or alter views.
+3. Run `01_data_cleaning.sql` and review its findings. Despite its legacy name, it audits data without updating or deleting records. Then execute analysis scripts `02` through `06`.
+4. Execute one `07` deployment script. The compatibility variant includes reconciliation queries to compare revenue and order totals across the reporting views. Shipping intentionally covers a narrower population than overall sales.
+5. Export the required result sets and import them into Looker Studio. Set field types and aggregations, build the five reporting pages, and align filters with the intended KPI scope. Refreshing the dashboard data requires repeating the export/import process.
+
+For complete environment reproduction, document the exact Northwind installation source, SQL Server version, and exported file-to-Looker-source mapping alongside the repository. The environment must support the T-SQL functions used by the scripts; the two `07` variants differ in their view-deployment syntax.
+
+## Analytical limits and reconciliation
+
+- **Financial precision:** overall revenue is summarized as approximately $1.27 million. The dashboard total is $1,265,793.04, its displayed employee amounts sum to $1,265,793.05, and the product SQL's fixed reconciliation target is $1,265,793.22. An exact shared baseline requires comparing unrounded outputs and exported precision; the cause of these differences is not established here.
+- **Time coverage:** monthly SQL queries infer the final incomplete month from the latest order date. BI views retain all available months, so trend exclusions must be applied in reporting. First-month coverage and missing months also need consideration when interpreting growth; the short history does not establish recurring seasonality.
+- **Causality and scope:** discount comparisons do not estimate promotional effects or price elasticity. Inventory fields are a snapshot, not historical stock records. Shipment timing differences and employee sales rankings need operational context before business action.
+
+## Skills demonstrated
+
+T-SQL joins and CTEs; window functions (`LAG`, `RANK`, `PERCENT_RANK`, `PERCENTILE_CONT`, cumulative sums); quality auditing; transaction-level financial calculations; RFM segmentation; IQR classification; reporting-view design; aggregation-grain management; dashboard design; and evidence-based business interpretation.
