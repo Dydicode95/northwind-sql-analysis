@@ -93,18 +93,18 @@ The analysis follows the CQNARD sequence: Context, Questions, data quality and p
 
 | File | Analytical purpose |
 | --- | --- |
-| `01_data_cleaning.sql` | Non-destructive quality audit: financial fields, missing references, dates, pending orders, and inventory snapshot |
-| `02_sales_analysis.sql` | Monthly revenue, growth, cumulative revenue, and first-observed customer orders |
-| `03_customer_analysis.sql` | Customer value, RFM segmentation, inactivity monitoring, and regional basket comparisons |
-| `04_product_analysis.sql` | Product/category rankings, revenue versus volume profiles, discount exposure, and inventory snapshot |
-| `05_logistics_analysis.sql` | Shipment timing, lead times, freight amounts, and carrier/destination comparisons |
-| `06_employee_analysis.sql` | Employee metrics, revenue contribution, and customer-geography footprint |
-| `07_kpi_views.sql` | Six reporting views using `CREATE OR ALTER VIEW` |
-| `07_kpi_views_final_sql_server.sql` | Equivalent view definitions using conditional creation followed by `ALTER VIEW`, plus reconciliation queries |
-| `screenshots/` | Five captures from the revised dashboard pages |
+| `SQL/01_data_cleaning.sql` | Non-destructive quality audit: financial fields, missing references, dates, pending orders, and inventory snapshot |
+| `SQL/02_sales_analysis.sql` | Monthly revenue, growth, cumulative revenue, and first-observed customer orders |
+| `SQL/03_customer_analysis.sql` | Customer value, RFM segmentation, inactivity monitoring, and regional basket comparisons |
+| `SQL/04_product_analysis.sql` | Product/category rankings, revenue versus volume profiles, discount exposure, and inventory snapshot |
+| `SQL/05_logistics_analysis.sql` | Shipment timing, lead times, freight amounts, and carrier/destination comparisons |
+| `SQL/06_employee_analysis.sql` | Employee metrics, revenue contribution, and customer-geography footprint |
+| `SQL/07_kpi_views.sql` | Six reporting views using conditional creation followed by `ALTER VIEW`, plus reconciliation queries |
+| `screenshots/` | Five dashboard captures referenced by this README |
+| `northwind-er-diagram.jpg` | Database relationship diagram |
 | `README.md` | Project objectives, results, metric definitions, and reproduction notes |
 
-The two `07` scripts define the same six views with different deployment syntax. Execute one suitable for the SQL environment. SQL analysis also includes outputs beyond those displayed in the dashboard.
+The `SQL/` folder contains seven scripts, numbered `01` through `07`. `SQL/07_kpi_views.sql` includes view deployment and reconciliation queries. SQL analysis also includes outputs beyond those displayed in the dashboard.
 
 ## Metric definitions and reporting model
 
@@ -147,11 +147,11 @@ Sales and shipping use `ShipCountry`; customer analysis uses `Customers.Country`
 
 1. Load Northwind into a dedicated SQL Server database. The scripts require `Orders`, `[Order Details]`, `Customers`, `Products`, `Categories`, `Shippers`, and `Employees` in the `dbo` schema. The installation dataset is not included in the SQL archive.
 2. Replace each leading `USE master;` with the database containing those tables, for example `USE [Northwind];`. Use a SQL client configured for T-SQL and `GO` batches, with read access and permission to create or alter views.
-3. Run `01_data_cleaning.sql` and review its findings. Despite its legacy name, it audits data without updating or deleting records. Then execute analysis scripts `02` through `06`.
-4. Execute one `07` deployment script. The compatibility variant includes reconciliation queries to compare revenue and order totals across the reporting views. Shipping intentionally covers a narrower population than overall sales.
+3. Run `SQL/01_data_cleaning.sql` and review its findings. Despite its legacy name, it audits data without updating or deleting records. Then execute analysis scripts `02` through `06` in `SQL/`.
+4. Execute `SQL/07_kpi_views.sql`, including its final reconciliation queries to compare revenue and order totals across the reporting views. Shipping intentionally covers a narrower population than overall sales.
 5. Export the required result sets and import them into Looker Studio. Set field types and aggregations, build the five reporting pages, and align filters with the intended KPI scope. Refreshing the dashboard data requires repeating the export/import process.
 
-For complete environment reproduction, document the exact Northwind installation source, SQL Server version, and exported file-to-Looker-source mapping alongside the repository. The environment must support the T-SQL functions used by the scripts; the two `07` variants differ in their view-deployment syntax.
+For complete environment reproduction, document the exact Northwind installation source, SQL Server version, and exported file-to-Looker-source mapping alongside the repository. The environment must support the T-SQL functions used by the scripts.
 
 ## Analytical limits and reconciliation
 
