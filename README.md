@@ -101,7 +101,7 @@ The analysis follows the CQNARD sequence: Context, Questions, data quality and p
 | `SQL/06_employee_analysis.sql` | Employee metrics, revenue contribution, and customer-geography footprint |
 | `SQL/07_kpi_views.sql` | Six reporting views using conditional creation followed by `ALTER VIEW`, plus reconciliation queries |
 | `screenshots/` | Five dashboard captures referenced by this README |
-| `northwind-er-diagram.jpg` | Database relationship diagram |
+| [Northwind_ER_A4.pdf](Northwind_ER_A4.pdf) | Database relationship diagram |
 | `README.md` | Project objectives, results, metric definitions, and reproduction notes |
 
 The `SQL/` folder contains seven scripts, numbered `01` through `07`. `SQL/07_kpi_views.sql` includes view deployment and reconciliation queries. SQL analysis also includes outputs beyond those displayed in the dashboard.
